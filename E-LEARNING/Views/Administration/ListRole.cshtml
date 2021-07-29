@@ -1,0 +1,95 @@
+﻿@using Microsoft.AspNetCore.Identity;
+@model IEnumerable<IdentityRole>
+
+@{
+    ViewBag.Title = "All Roles";
+}
+
+@*<h1>Tout les roles</h1>*@
+
+<a class="btn btn-primary mb-3" style="width:auto" asp-action="CreateRole">Ajouter un role</a>
+
+<table class="table table-striped">
+    <thead class="thead-light">
+        <tr>
+            @*<th scope="col">#</th>*@
+            <th scope="col">Name</th>
+            <th scope="col">Option</th>
+            
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Any())
+        {
+            @foreach (var role in Model)
+            {
+                <tr>
+                    @*<th scope="row">@role.Id</th>*@
+                    <td>@role.Name</td>
+                    <td>
+                        
+                        
+
+                        <form asp-action="DeleteRole" asp-route-id="@role.Id" method="post">
+                            <div class="btn-group btn-group-toggle">
+
+
+                                <a asp-controller="Administration" asp-action="EditRole"
+                                   asp-route-id="@role.Id" class="btn btn-primary">
+                                    Edit
+                                </a>
+                                <span id="confirmDeleteSpan_@role.Id" style="display:none">
+                                    <span>Etes-vous sûr que vous voulez supprimer?</span>
+                                    <button type="submit" class="btn btn-danger">Oui</button>
+                                    <a href="#" class="btn btn-primary"
+                                       onclick="confirmDelete('@role.Id', false)">Non</a>
+                                </span>
+
+                                <span id="deleteSpan_@role.Id">
+                                    <a href="#" class="btn btn-danger"
+                                       onclick="confirmDelete('@role.Id', true)">Delete</a>
+                                </span>
+                            </div>
+                        </form>
+
+                    </td>
+                </tr>
+            }
+
+        }
+        else
+        {
+            <tr>
+                <th scope="row">Aucun role existe</th>
+                <td>Cliquer sur le button ajouter pour ajouter un nouveau role</td>
+                <td>
+                    <button type="button" class="btn btn-primary">Edit</button> \\
+                    <button type="button" class="btn btn-danger">Delete</button>
+                </td>
+            </tr>
+        }
+
+    </tbody>
+</table>
+
+@section Scripts{ 
+    <script>
+        function confirmDelete(uniqueId, isTrue) {
+
+            var deleteSpan = 'deleteSpan_' + uniqueId;
+            var confirmDeleteSpan = 'confirmDeleteSpan_' + uniqueId;
+
+            if (isTrue) {
+                $('#' + deleteSpan).hide();
+                $('#' + confirmDeleteSpan).show();
+            } else {
+                $('#' + deleteSpan).show();
+                $('#' + confirmDeleteSpan).hide();
+            }
+        }
+    </script>
+}
+
+    
+
+    
