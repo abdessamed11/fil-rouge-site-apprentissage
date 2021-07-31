@@ -27,9 +27,9 @@ namespace E_LEARNING.Controllers
         public async Task<IActionResult> Data()
         {
 
-            var list = _context.titres
+            var list =await _context.titres
                 .Include(i => i.formation)
-                .ThenInclude(s => s.Student).ToList();
+                .ThenInclude(s => s.Student).ToListAsync();
             
             return View("Index", list);
         }

@@ -220,3 +220,6 @@ C:\Users\Administrateur\OneDrive\Bureau\E-LEARNING\obj\Debug\netcoreapp3.1\Razor
 C:\Users\Administrateur\OneDrive\Bureau\E-LEARNING\obj\Debug\netcoreapp3.1\Razor\Views\formations1\Details.cshtml.g.cs
 C:\Users\Administrateur\OneDrive\Bureau\E-LEARNING\obj\Debug\netcoreapp3.1\Razor\Views\formations1\Edit.cshtml.g.cs
 C:\Users\Administrateur\OneDrive\Bureau\E-LEARNING\obj\Debug\netcoreapp3.1\Razor\Views\formations1\Index.cshtml.g.cs
+C:\Users\Administrateur\OneDrive\Bureau\E-LEARNING\obj\Debug\netcoreapp3.1\Razor\Views\formations\Edit.cshtml.g.cs
+C:\Users\Administrateur\OneDrive\Bureau\E-LEARNING\obj\Debug\netcoreapp3.1\Razor\Views\formations\Details.cshtml.g.cs
+C:\Users\Administrateur\OneDrive\Bureau\E-LEARNING\obj\Debug\netcoreapp3.1\Razor\Views\formations\Delete.cshtml.g.cs

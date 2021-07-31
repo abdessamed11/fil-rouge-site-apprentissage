@@ -3,6 +3,7 @@
 @{
     ViewData["Title"] = "Edit";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var formation = ViewBag.formation;
 }
 
 <h1>Edit</h1>
@@ -36,7 +37,14 @@
             </div>
             <div class="form-group">
                 <label asp-for="formationId" class="control-label"></label>
-                <input asp-for="formationId" class="form-control" />
+                <select asp-for="formationId" class="browser-default control-label custom-select" aria-label="Default select example">
+                    <option selected>Open this select menu</option>
+
+                    @foreach(var item in formation) { 
+                      <option value="@item.Id">@item.Name</option>
+                    }
+   
+                </select>
                 <span asp-validation-for="formationId" class="text-danger"></span>
             </div>
             <div class="form-group">

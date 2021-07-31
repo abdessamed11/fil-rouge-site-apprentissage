@@ -19,14 +19,27 @@ namespace E_LEARNING.Controllers
             _context = context;
         }
 
-        // GET: Titres
+        
         public async Task<IActionResult> Index()
         {
-            var titre = await _context.titres.ToListAsync();
+            var titre = await _context.titres.Include(s=>s.formation).ThenInclude(rt => rt.Student).ToListAsync();
             return View(titre);
         }
 
-        // GET: Titres/Details/5
+        [HttpPost]
+        public ActionResult Index(string? names)
+        {
+            
+
+            var formation = _context.titres
+                                .Include(s => s.formation)
+                                .ThenInclude(rt => rt.Student)
+                              .Where(t => t.formation.Name.Contains($"{names}"));
+
+            
+            return View(formation);
+        }
+
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -34,7 +47,7 @@ namespace E_LEARNING.Controllers
                 return NotFound();
             }
 
-            var titre = await _context.titres.FirstOrDefaultAsync(m => m.Id == id);
+            var titre = await _context.titres.Include(s=>s.formation).FirstOrDefaultAsync(m => m.Id == id);
             if (titre == null)
             {
                 return NotFound();
@@ -43,9 +56,10 @@ namespace E_LEARNING.Controllers
             return View(titre);
         }
 
-        // GET: Titres/Create
+        
         public IActionResult Create()
         {
+            ViewBag.formation = _context.formations.ToList();
             return View();
         }
 
@@ -70,7 +84,7 @@ namespace E_LEARNING.Controllers
             {
                 return NotFound();
             }
-
+            ViewBag.formation = _context.formations.ToList();
             var titre = await _context.titres.FindAsync(id);
             if (titre == null)
             {

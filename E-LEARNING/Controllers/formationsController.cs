@@ -73,6 +73,47 @@ namespace E_LEARNING.Controllers
 
             return View(formation);
         }
-        
+
+        public async Task<IActionResult> Edit(int id)
+        {
+            var form =await _context.formations.FindAsync(id);
+            return View(form);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(formation formation)
+        {
+            if (ModelState.IsValid)
+            {
+                var student = await _usermanager.GetUserAsync(HttpContext.User);
+                formation.StudentId = student.Id;
+                _context.Update(formation);
+               await _context.SaveChangesAsync();
+                
+            }
+            return RedirectToAction("index",formation);
+        }
+
+        public IActionResult Details(int id)
+        {
+            var form = _context.formations.Include(s=>s.Student).FirstOrDefault(r=>r.Id==id);
+            return View(form);
+        }
+
+        public async Task<IActionResult> Delete(int id)
+        {
+            var form = await _context.formations.Include(s=>s.Student).FirstOrDefaultAsync(r=>r.Id==id);
+            return View(form);
+        }
+
+        [HttpPost]
+        public IActionResult Delete(int? id)
+        {
+            var form = _context.formations.Find(id);
+            _context.Remove(form);
+            _context.SaveChanges();
+            return RedirectToAction("index");
+        }
+
     }
 }

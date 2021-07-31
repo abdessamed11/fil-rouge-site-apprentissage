@@ -7,12 +7,22 @@
 
 <h1>Index</h1>
 
+<form method="post" class="float-lg-right">
+    <div class="input-group mb-3 ">
+        <input name="names" type="text" />
+        <div class="input-group-append">
+            <input type="submit" value="Search" class="btn btn-success" />
+        </div>
+    </div>
+
+</form>
+
 <p>
-    <a asp-action="Create">Create New</a>
+    <a class="btn btn-success" asp-action="Create">Create New</a>
 </p>
-<table class="table">
-    <thead>
-        <tr>
+<table class="table table-striped border">
+    <thead class="thead-dark">
+        <tr class="table-secondary">
             <th>
                 @Html.DisplayNameFor(model => model.Date)
             </th>
@@ -26,7 +36,10 @@
                 @Html.DisplayNameFor(model => model.video_art)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.formationId)
+                @Html.DisplayNameFor(model => model.formation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.formation.Student)
             </th>
             <th></th>
         </tr>
@@ -47,12 +60,16 @@
                 @Html.DisplayFor(modelItem => item.video_art)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.formationId)
+                @Html.DisplayFor(modelItem => item.formation.Name)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                @Html.DisplayFor(modelItem => item.formation.Student.FirstName)
+                @Html.DisplayFor(modelItem => item.formation.Student.LastName)
+            </td>
+            <td class="w-25">
+                <a class="btn btn-success" asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a class="btn btn-info" asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
             </td>
         </tr>
 }
