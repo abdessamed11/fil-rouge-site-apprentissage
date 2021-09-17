@@ -10,36 +10,22 @@ using E_LEARNING.Models;
 
 namespace E_LEARNING.Controllers
 {
-    public class TitresController : Controller
+    public class CategoriesController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public TitresController(ApplicationDbContext context)
+        public CategoriesController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        
+        // GET: Categories
         public async Task<IActionResult> Index()
         {
-            var titre = await _context.titres.Include(s=>s.formation).ThenInclude(rt => rt.Student).ToListAsync();
-            return View(titre);
+            return View(await _context.categories.ToListAsync());
         }
 
-        [HttpPost]
-        public ActionResult Index(string names)
-        {
-            
-
-            var formation = _context.titres
-                                .Include(s => s.formation)
-                                .ThenInclude(rt => rt.Student)
-                              .Where(t => t.formation.Name.Contains($"{names}"));
-
-            
-            return View(formation);
-        }
-
+        // GET: Categories/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -47,58 +33,62 @@ namespace E_LEARNING.Controllers
                 return NotFound();
             }
 
-            var titre = await _context.titres.Include(s=>s.formation).FirstOrDefaultAsync(m => m.Id == id);
-            if (titre == null)
+            var categorie = await _context.categories
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (categorie == null)
             {
                 return NotFound();
             }
 
-            return View(titre);
+            return View(categorie);
         }
 
-        
+        // GET: Categories/Create
         public IActionResult Create()
         {
-            ViewBag.formation = _context.formations.ToList();
             return View();
         }
 
-        
+        // POST: Categories/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Date,Name,Article_art,video_art,formationId")] Titre titre)
+        public async Task<IActionResult> Create([Bind("Id,Name")] Categorie categorie)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(titre);
+                _context.Add(categorie);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(titre);
+            return View(categorie);
         }
 
-        
+        // GET: Categories/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
-            ViewBag.formation = _context.formations.ToList();
-            var titre = await _context.titres.FindAsync(id);
-            if (titre == null)
+
+            var categorie = await _context.categories.FindAsync(id);
+            if (categorie == null)
             {
                 return NotFound();
             }
-            return View(titre);
+            return View(categorie);
         }
 
-        
+        // POST: Categories/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Date,Name,Article_art,video_art,formationId")] Titre titre)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name")] Categorie categorie)
         {
-            if (id != titre.Id)
+            if (id != categorie.Id)
             {
                 return NotFound();
             }
@@ -107,12 +97,12 @@ namespace E_LEARNING.Controllers
             {
                 try
                 {
-                    _context.Update(titre);
+                    _context.Update(categorie);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!TitreExists(titre.Id))
+                    if (!CategorieExists(categorie.Id))
                     {
                         return NotFound();
                     }
@@ -123,10 +113,10 @@ namespace E_LEARNING.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(titre);
+            return View(categorie);
         }
 
-        
+        // GET: Categories/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -134,30 +124,30 @@ namespace E_LEARNING.Controllers
                 return NotFound();
             }
 
-            var titre = await _context.titres
+            var categorie = await _context.categories
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (titre == null)
+            if (categorie == null)
             {
                 return NotFound();
             }
 
-            return View(titre);
+            return View(categorie);
         }
 
-        
+        // POST: Categories/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var titre = await _context.titres.FindAsync(id);
-            _context.titres.Remove(titre);
+            var categorie = await _context.categories.FindAsync(id);
+            _context.categories.Remove(categorie);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool TitreExists(int id)
+        private bool CategorieExists(int id)
         {
-            return _context.titres.Any(e => e.Id == id);
+            return _context.categories.Any(e => e.Id == id);
         }
     }
 }

@@ -40,12 +40,13 @@ namespace E_LEARNING.Controllers
         public async Task<IActionResult> DataByUser()
         {
             var student = await _usermanager.GetUserAsync(HttpContext.User);
-            var format = await _context.formations.Include(i => i.Student).ToListAsync();
+            var format = await _context.formations.Include(i => i.Student).Include(c=>c.categorie).ToListAsync();
             return View(format.Where(i=>i.StudentId==student.Id));
         }
 
         public IActionResult Create()
         {
+            ViewBag.categorie = _context.categories.ToList();
             return View();
         }
 
@@ -64,6 +65,7 @@ namespace E_LEARNING.Controllers
                 reser.Name = formation.Name;
                 reser.Description = formation.Description;
                 reser.StudentId = student.Id;
+                reser.CategorieId = formation.CategorieId;
 
                 _context.Add(reser);
 

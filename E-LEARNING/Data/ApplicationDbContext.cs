@@ -15,11 +15,9 @@ namespace E_LEARNING.Data
         }
 
         public DbSet<Student> students { get; set; }
-        public DbSet<Formateur> formateurs { get; set; }
         public DbSet<formation> formations { get; set; }
         public DbSet<Titre> titres { get; set; }
-        public DbSet<Article> articles { get; set; }
-        public DbSet<SousArticle> sousArticles { get; set; }
-        public DbSet<Video> videos { get; set; }
+        public DbSet<Categorie> categories { get; set; }
+        
     }
 }

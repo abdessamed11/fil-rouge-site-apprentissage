@@ -1,4 +1,6 @@
 using E_LEARNING.Data;
+using E_LEARNING.Repo;
+using E_LEARNING.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -43,6 +45,9 @@ namespace E_LEARNING
                 .AddDefaultTokenProviders()
                 .AddDefaultUI()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+
+            services.AddScoped<IRepoformation,FormationRepo >();
+
             services.AddControllersWithViews();
             services.AddRazorPages();
             

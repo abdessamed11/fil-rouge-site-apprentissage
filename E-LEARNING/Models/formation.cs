@@ -14,9 +14,12 @@ namespace E_LEARNING.Models
         public string Name { get; set; }
         public string Description { get; set; }
 
-        [ForeignKey("StudentId")]        
+        [ForeignKey("StudentId,CategorieId")]        
         public string StudentId { get; set; }
         public Student Student { get; set; }
+
+        public int CategorieId { get; set; }
+        public Categorie categorie { get; set; }
 
     }
 }

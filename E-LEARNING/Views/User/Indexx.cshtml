@@ -1,0 +1,45 @@
+﻿@using Microsoft.AspNetCore.Identity;
+@model IEnumerable<IdentityUser>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Tout les utilisateurs</h1>
+
+<table class="table table-striped table-bordered">
+    <thead class="thead-dark">
+        <tr>
+
+            <th scope="col">UserName</th>
+            <th scope="col">Email</th>
+            <th scope="col">Option</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Any())
+        {
+            @foreach (var user in Model)
+            {
+        <tr>
+
+            <td>@user.UserName</td>
+            <td>@user.Email</td>
+
+            <td>
+                <button type="button" class="btn btn-primary">Edit</button> \\
+                <button asp-action="DeleteUser" type="button" class="btn btn-danger" asp-route-id="@user.Id">Delete</button>
+            </td>
+
+        </tr>
+
+        
+                
+        
+                }
+            }
+
+    </tbody>
+</table>
+
