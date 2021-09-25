@@ -8849,11 +8849,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Administrateur\\OneDrive\\Bureau\\E-LEARNING\\E-LEARNING.csproj",
+      "projectUniqueName": "C:\\Users\\Administrateur\\OneDrive\\Bureau\\file rouge\\fil-rouge-site-apprentissage\\E-LEARNING\\E-LEARNING.csproj",
       "projectName": "E-LEARNING",
-      "projectPath": "C:\\Users\\Administrateur\\OneDrive\\Bureau\\E-LEARNING\\E-LEARNING.csproj",
+      "projectPath": "C:\\Users\\Administrateur\\OneDrive\\Bureau\\file rouge\\fil-rouge-site-apprentissage\\E-LEARNING\\E-LEARNING.csproj",
       "packagesPath": "C:\\Users\\Administrateur\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Administrateur\\OneDrive\\Bureau\\E-LEARNING\\obj\\",
+      "outputPath": "C:\\Users\\Administrateur\\OneDrive\\Bureau\\file rouge\\fil-rouge-site-apprentissage\\E-LEARNING\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",

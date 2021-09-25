@@ -79,6 +79,7 @@ namespace E_LEARNING.Controllers
         public async Task<IActionResult> Edit(int id)
         {
             var form =await _context.formations.FindAsync(id);
+
             return View(form);
         }
 
@@ -87,8 +88,10 @@ namespace E_LEARNING.Controllers
         {
             if (ModelState.IsValid)
             {
+                var categ = _context.categories.Where(r => r.Id == formation.CategorieId).FirstOrDefault();
                 var student = await _usermanager.GetUserAsync(HttpContext.User);
                 formation.StudentId = student.Id;
+                formation.CategorieId = categ.Id;
                 _context.Update(formation);
                await _context.SaveChangesAsync();
                 
